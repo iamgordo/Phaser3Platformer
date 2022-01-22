@@ -14,7 +14,7 @@ var SceneThree = new Phaser.Class({
   },
   create: function () {
     this.fx = this.sound.add("sfx1", { loop: true });
-    this.fx.setVolume(0.1);
+    this.fx.setVolume(0.4);
     this.fx.play();
 
     this.jump = this.sound.add("jump", { loop: false });

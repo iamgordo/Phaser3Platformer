@@ -35,11 +35,11 @@ var SceneOne = new Phaser.Class({
       console.log("complete");
     });
     this.load.audio("sfx", "./assets/audio/chinese_dream.mp3");
-    this.load.audio("sfx1", "./assets/audio/synth1.mp3");
+    this.load.audio("sfx1", "./assets/audio/enigma.mp3");
     this.load.audio("jump", "./assets/audio/jump.wav");
     this.load.audio("jumpon", "./assets/audio/jumpon.wav");
     this.load.audio("reward", "./assets/audio/reward.wav");
-    this.load.audio("sfx2", "./assets/audio/top1.mp3");
+    this.load.audio("sfx2", "./assets/audio/global_trash.mp3");
     this.load.image("door", "./assets/img/door.png");
     this.load.image("box", "./assets/img/box.png");
     this.load.image("tiles", "./assets/img/tileset.png");
