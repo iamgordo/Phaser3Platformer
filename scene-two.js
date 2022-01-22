@@ -104,8 +104,6 @@ var SceneTwo = new Phaser.Class({
       goody,
       function () {
         this.fx.stop();
-        // this.scene.pause("SceneOne");
-        // SceneOne.active = false;
         this.time.addEvent({
           delay: 2000,
           loop: false,
