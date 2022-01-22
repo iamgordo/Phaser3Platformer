@@ -134,7 +134,6 @@ var SceneOne = new Phaser.Class({
     let door1 = this.physics.add.staticImage(8000, 570, "door");
     goody = this.physics.add.sprite(300, 400, "guy");
     goody.body.width = 57;
-    // goody.play("walk");
 
     this.physics.add.collider(
       door1,
