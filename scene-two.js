@@ -33,6 +33,28 @@ var SceneTwo = new Phaser.Class({
     const tileset = map.addTilesetImage("tileset", "tiles");
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     const two = map.createLayer("Two", tileset, 0, 0);
+    this.anims.create({
+      key: "sparkle",
+      frameRate: 20,
+      frames: this.anims.generateFrameNumbers("star", { start: 0, end: 7 }),
+      repeat: -1,
+    });
+    this.stars = this.physics.add.group({
+      allowGravity: false,
+      immovable: true,
+    });
+    map.getObjectLayer("Stars1").objects.forEach((star) => {
+      const starSprite = this.stars
+        .create(star.x, star.y - 20, "star")
+        .setOrigin(0.5, 0.5);
+      starSprite.body.setSize(star.width / 2, star.height / 2).setOffset(10, 0);
+    });
+    this.stars.getChildren().forEach(function (star) {
+      star.play("sparkle");
+      star.setRotation(100);
+      star.setOffset(16, 0);
+    }, this);
+    let self1 = this;
 
     this.brainguys = this.physics.add.group({
       key: "brainguy",
@@ -72,6 +94,10 @@ var SceneTwo = new Phaser.Class({
     goody = this.physics.add.sprite(300, 400, "guy");
     goody.body.width = 57;
     goody.play("walk");
+    this.physics.add.overlap(this.stars, goody, function (bod1, bod2) {
+      bod2.destroy();
+      self1.rew.play();
+    });
     this.brainguys.getChildren().forEach(function (bad1) {
       bad1.play("move");
     }, this);
@@ -120,6 +146,10 @@ var SceneTwo = new Phaser.Class({
     this.cursors = this.input.keyboard.createCursorKeys();
   },
   update: function () {
+    this.stars.getChildren().forEach(function (star) {
+      // star.play("sparkle");
+      star.rotation += 0.04;
+    }, this);
     this.brainguys.getChildren().forEach(function (bad1) {
       if (bad1.body.velocity.x === 0) {
         this.xSpeed *= -1;
