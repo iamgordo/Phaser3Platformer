@@ -10,7 +10,7 @@ var SceneZero = new Phaser.Class({
   create: function () {
     this.brain = this.add.image(300, 300, "brain");
     var text = this.add
-      .text(640, 360, "My Platformer", {
+      .text(640, 360, "               My Phaser 3 Platformer", {
         fontSize: 50,
         color: "#FFF",
         fontStyle: "bold",

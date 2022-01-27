@@ -36,6 +36,7 @@ var SceneOne = new Phaser.Class({
     });
     this.load.audio("sfx", "./assets/audio/chinese_dream.mp3");
     this.load.audio("sfx1", "./assets/audio/enigma.mp3");
+    this.load.audio("boom", "./assets/audio/boom.mp3");
     this.load.audio("jump", "./assets/audio/jump.wav");
     this.load.audio("jumpon", "./assets/audio/jumpon.wav");
     this.load.audio("reward", "./assets/audio/reward.wav");
@@ -83,6 +84,9 @@ var SceneOne = new Phaser.Class({
 
     this.rew = this.sound.add("reward", { loop: false });
     this.rew.setVolume(0.9);
+
+    this.boom = this.sound.add("boom", { loop: false });
+    this.boom.setVolume(0.6);
 
     this.anims.create({
       key: "walk",
@@ -184,6 +188,7 @@ var SceneOne = new Phaser.Class({
           this.physics.world.removeCollider(collide2);
           this.jumpon.play();
         } else {
+          this.boom.play();
           this.cameras.main.shake(500);
           this.fx.stop();
           this.time.addEvent({
@@ -288,7 +293,6 @@ var SceneOne = new Phaser.Class({
     let collide3 = this.physics.add.collider(
       goody,
       this.bad1s,
-
       function (bod1, bod2) {
         self1.jumpon.play();
         if (bod2.y - bod1.y > 80) {
@@ -302,6 +306,7 @@ var SceneOne = new Phaser.Class({
           });
         } else {
           this.fx.stop();
+          this.boom.play();
           this.cameras.main.shake(500);
           this.time.addEvent({
             delay: 500,

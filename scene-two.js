@@ -11,13 +11,14 @@ var SceneTwo = new Phaser.Class({
       frameWidth: 80,
       frameHeight: 115,
     });
-
+    // this.load.audio("boom", "./assets/audio/boom.mp3");
     this.load.tilemapTiledJSON("map2", "assets/tilemap/level2.json");
   },
   create: function () {
     this.fx = this.sound.add("sfx2", { loop: true });
     this.fx.setVolume(0.2);
     this.fx.play();
+
     this.jump = this.sound.add("jump", { loop: false });
     this.jump.setVolume(0.2);
 
@@ -26,6 +27,9 @@ var SceneTwo = new Phaser.Class({
 
     this.rew = this.sound.add("reward", { loop: false });
     this.rew.setVolume(0.9);
+
+    this.boom = this.sound.add("boom", { loop: false });
+    this.boom.setVolume(0.6);
 
     this.cameras.main.setBounds(0, 0, 8392, 400);
     this.physics.world.setBounds(0, 0, 8392, 440);
@@ -111,6 +115,7 @@ var SceneTwo = new Phaser.Class({
         bod2.destroy();
       } else {
         self.fx.stop();
+        self.boom.play();
         self.cameras.main.shake(500);
         self.time.addEvent({
           delay: 500,
