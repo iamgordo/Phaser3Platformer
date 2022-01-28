@@ -180,7 +180,6 @@ var SceneOne = new Phaser.Class({
             delay: 500,
             loop: false,
             callback: () => {
-              // this.scene.resume();
               this.scene.restart();
             },
           });
