@@ -41,6 +41,11 @@ var SceneOne = new Phaser.Class({
     this.load.audio("jumpon", "./assets/audio/jumpon.wav");
     this.load.audio("reward", "./assets/audio/reward.wav");
     this.load.audio("sfx2", "./assets/audio/global_trash.mp3");
+    this.load.bitmapFont(
+      "font",
+      "assets/img/azo-fire.png",
+      "assets/img/azo-fire.xml"
+    );
     this.load.image("door", "./assets/img/door.png");
     this.load.image("box", "./assets/img/box.png");
     this.load.image("tiles", "./assets/img/tileset.png");
@@ -125,6 +130,11 @@ var SceneOne = new Phaser.Class({
     const tileset = map.addTilesetImage("tileset", "tiles");
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     const two = map.createLayer("Two", tileset, 0, 0);
+    // find camera x and add it toscore below
+    var txt = this.add.bitmapText(0, 0, "font", "SCORE:", 38).setOrigin(0);
+    this.scoreTxt = this.add
+      .bitmapText(txt.x + txt.width + 10, 0, "font", "0", 38)
+      .setOrigin(0);
 
     bad3 = new BadGuy(this, 500, 400);
     bad4 = new BadGuy(this, 400, 400);

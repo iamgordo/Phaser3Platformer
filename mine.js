@@ -24,7 +24,7 @@ class BadGuy extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, "badgfx");
     this.xSpeed = 50;
-    // this.width = 40;
+    this.score = 0;
     // some default physics properties
     scene.add.existing(this);
     scene.physics.add.existing(this);
