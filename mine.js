@@ -45,12 +45,13 @@ class BadGuy extends Phaser.Physics.Arcade.Sprite {
     this.navigate();
   }
 }
-function showScore(amt) {
-  score += amt;
-  var txt = this.add
-    .bitmapText(0, 0, "font", "SCORE:" + score, 48)
-    .setOrigin(0);
-  // this.scoreTxt = this.add
-  //   .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
-  //   .setOrigin(0);
-}
+// function showScore(amt) {
+//   score += amt;
+//   var txt = this.add
+//     .bitmapText(0, 0, "font", "SCORE:" + score, 48)
+//     .setOrigin(0);
+//   txt.x = goody.x;
+//   this.scoreTxt = this.add
+//     .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
+//     .setOrigin(0);
+// }

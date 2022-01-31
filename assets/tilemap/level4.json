@@ -32,16 +32,16 @@
          "name":"Bad",
          "objects":[
                 {
-                 "gid":296,
+                 "gid":316,
                  "height":64,
-                 "id":44,
+                 "id":47,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":64,
                  "x":320,
-                 "y":256
+                 "y":192
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -109,7 +109,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":47,
+ "nextobjectid":48,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

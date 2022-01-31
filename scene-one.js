@@ -10,7 +10,8 @@ var SceneOne = new Phaser.Class({
   },
   // init: function () {},
   preload: function () {
-    console.time("time");
+    this.self = this;
+    // console.time("time");
     var text = this.add.text(640, 260, "Loading...", {
       fontSize: 50,
       color: "#FFF",
@@ -141,7 +142,7 @@ var SceneOne = new Phaser.Class({
     this.scoreTxt = this.add
       .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
       .setOrigin(0);
-
+    // incScore(0);
     bad3 = new BadGuy(this, 500, 400);
     bad4 = new BadGuy(this, 400, 400);
     let collide1 = this.physics.add.collider(bad4, platforms);
@@ -395,3 +396,10 @@ var SceneOne = new Phaser.Class({
     }
   },
 });
+function incScore(amt) {
+  score += amt;
+  this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
+  this.scoreTxt = this.add
+    .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
+    .setOrigin(0);
+}
