@@ -58,6 +58,10 @@ var SceneOne = new Phaser.Class({
       frameWidth: 80,
       frameHeight: 116,
     });
+    this.load.spritesheet("3stars", "./assets/img/3stars2.png", {
+      frameWidth: 64,
+      frameHeight: 64,
+    });
     this.load.spritesheet("bad", "./assets/img/bad2.png", {
       frameWidth: 64,
       frameHeight: 64,
@@ -131,9 +135,9 @@ var SceneOne = new Phaser.Class({
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     const two = map.createLayer("Two", tileset, 0, 0);
     // find camera x and add it toscore below
-    var txt = this.add.bitmapText(0, 0, "font", "SCORE:", 38).setOrigin(0);
+    var txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
     this.scoreTxt = this.add
-      .bitmapText(txt.x + txt.width + 10, 0, "font", "0", 38)
+      .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
       .setOrigin(0);
 
     bad3 = new BadGuy(this, 500, 400);
@@ -173,6 +177,7 @@ var SceneOne = new Phaser.Class({
         if (bad4.body.y - goody.body.y > 102) {
           goody.body.setVelocityY(-130);
           this.physics.world.removeCollider(collide1);
+          showScore(20);
         } else {
           this.fx.stop();
           this.cameras.main.shake(500);

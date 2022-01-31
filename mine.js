@@ -1,3 +1,4 @@
+var score = 0;
 const config = {
   type: Phaser.AUTO,
   parent: "game",
@@ -24,7 +25,6 @@ class BadGuy extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, "badgfx");
     this.xSpeed = 50;
-    this.score = 0;
     // some default physics properties
     scene.add.existing(this);
     scene.physics.add.existing(this);
@@ -44,4 +44,13 @@ class BadGuy extends Phaser.Physics.Arcade.Sprite {
     super.preUpdate(time, delta);
     this.navigate();
   }
+}
+function showScore(amt) {
+  score += amt;
+  var txt = this.add
+    .bitmapText(0, 0, "font", "SCORE:" + score, 48)
+    .setOrigin(0);
+  // this.scoreTxt = this.add
+  //   .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
+  //   .setOrigin(0);
 }

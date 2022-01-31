@@ -34,13 +34,40 @@ var SceneThree = new Phaser.Class({
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     // platforms.getChildren().setFrictionX(0.5);
     // const boxes = map.createLayer("Reward", tileset, 0, 0);
+    // this.nstars = this.physics.add.group({
+    //   allowGravity: true,
+    //   immovable: true,
+    // });
+    // this.anims.create({
+    //   key: "3stars",
+    //   frameRate: 20,
+    //   frames: this.anims.generateFrameNumbers("3stars", { start: 0, end: 2 }),
+    //   repeat: -1,
+    // });
+    // map.getObjectLayer("Bad").objects.forEach((bad) => {
+    //   const badSprite = this.nstars
+    //     .create(bad.x, bad.y - 20, "3stars")
+    //     .setOrigin(0.5, 0.5);
+    //   badSprite.body.setSize(bad.width / 2, bad.height / 2).setOffset(10, 0);
+    // });
 
+    // this.stars.getChildren().forEach(function (star) {
+    //   star.play("sparkle");
+    //   star.setRotation(100);
+    //   star.setOffset(16, 0);
+    // }, this);
     this.boxes = this.physics.add.group({
       key: "box",
       allowGravity: true,
       immovable: false,
     });
     this.boxes.getChildren()[0].setFrictionX(0.5);
+    // this.anims.create({
+    //   key: "3stars",
+    //   frameRate: 20,
+    //   frames: this.anims.generateFrameNumbers("3stars", { start: 0, end: 2 }),
+    //   repeat: -1,
+    // });
     map.getObjectLayer("Reward").objects.forEach((box) => {
       const boxSprite = this.boxes
         .create(box.x, box.y, "box")
@@ -65,7 +92,12 @@ var SceneThree = new Phaser.Class({
       frames: this.anims.generateFrameNumbers("guy", { start: 0, end: 6 }),
       repeat: -1,
     });
-
+    // this.anims.create({
+    //   key: "3stars",
+    //   frameRate: 20,
+    //   frames: this.anims.generateFrameNumbers("3stars", { start: 0, end: 2 }),
+    //   repeat: -1,
+    // });
     goody = this.physics.add.sprite(300, 480, "guy");
     goody.body.width = 57;
     goody.play("walk");
