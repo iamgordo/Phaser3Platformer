@@ -10,6 +10,7 @@ var SceneOne = new Phaser.Class({
   },
   // init: function () {},
   preload: function () {
+    console.time("time");
     var text = this.add.text(640, 260, "Loading...", {
       fontSize: 50,
       color: "#FFF",
@@ -79,6 +80,7 @@ var SceneOne = new Phaser.Class({
       frameHeight: 64,
     });
     this.load.tilemapTiledJSON("map", "assets/tilemap/level1.json");
+    console.timeEnd("time");
   },
   create: function () {
     this.fx = this.sound.add("sfx", { loop: true });
@@ -177,7 +179,7 @@ var SceneOne = new Phaser.Class({
         if (bad4.body.y - goody.body.y > 102) {
           goody.body.setVelocityY(-130);
           this.physics.world.removeCollider(collide1);
-          showScore(20);
+          // showScore(20);
         } else {
           this.fx.stop();
           this.cameras.main.shake(500);
