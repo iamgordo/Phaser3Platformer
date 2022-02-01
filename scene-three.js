@@ -26,6 +26,9 @@ var SceneThree = new Phaser.Class({
     this.rew = this.sound.add("reward", { loop: false });
     this.rew.setVolume(0.9);
 
+    this.boom = this.sound.add("boom", { loop: true });
+    this.boom.setVolume(0.2);
+
     this.cameras.main.setBounds(0, 0, 8392, 400);
     this.physics.world.setBounds(0, 0, 8392, 440);
     const map = this.make.tilemap({ key: "map3" });
@@ -111,6 +114,18 @@ var SceneThree = new Phaser.Class({
     this.cursors = this.input.keyboard.createCursorKeys();
   },
   update: function () {
+    if (goody.body.y > 650) {
+      this.boom.play();
+      this.cameras.main.shake(500);
+      this.fx.stop();
+      this.time.addEvent({
+        delay: 500,
+        loop: false,
+        callback: () => {
+          this.scene.restart();
+        },
+      });
+    }
     if (this.cursors.left.isDown) {
       goody.setVelocityX(-this.walkspeed);
     } else if (this.cursors.right.isDown) {

@@ -220,6 +220,18 @@ var SceneOne = new Phaser.Class({
       null,
       this
     );
+    if (goody.body.y > 650) {
+      this.boom.play();
+      this.cameras.main.shake(500);
+      this.fx.stop();
+      this.time.addEvent({
+        delay: 500,
+        loop: false,
+        callback: () => {
+          this.scene.restart();
+        },
+      });
+    }
     // if (!goody.body.onFloor()) {
     //   // goody.play("jumping");
     // }
