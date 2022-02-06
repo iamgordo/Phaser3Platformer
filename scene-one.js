@@ -11,7 +11,6 @@ var SceneOne = new Phaser.Class({
   // init: function () {},
   preload: function () {
     this.self = this;
-    // console.time("time");
     var text = this.add.text(640, 260, "Loading...", {
       fontSize: 50,
       color: "#FFF",
@@ -34,7 +33,6 @@ var SceneOne = new Phaser.Class({
       // console.log(file.src);
     });
     this.load.on("complete", function () {
-      console.log("complete");
     });
     this.load.audio("sfx", "./assets/audio/chinese_dream.mp3");
     this.load.audio("sfx1", "./assets/audio/enigma.mp3");
@@ -81,7 +79,7 @@ var SceneOne = new Phaser.Class({
       frameHeight: 64,
     });
     this.load.tilemapTiledJSON("map", "assets/tilemap/level1.json");
-    console.timeEnd("time");
+    // console.timeEnd("time");
   },
   create: function () {
     this.fx = this.sound.add("sfx", { loop: true });
@@ -138,9 +136,9 @@ var SceneOne = new Phaser.Class({
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     const two = map.createLayer("Two", tileset, 0, 0);
     // find camera x and add it toscore below
-    var txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
+    this.txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
     this.scoreTxt = this.add
-      .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
+      .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
       .setOrigin(0);
     // incScore(0);
     bad3 = new BadGuy(this, 500, 400);
@@ -180,7 +178,7 @@ var SceneOne = new Phaser.Class({
         if (bad4.body.y - goody.body.y > 102) {
           goody.body.setVelocityY(-130);
           this.physics.world.removeCollider(collide1);
-          // showScore(20);
+          // incScore(20);
         } else {
           this.fx.stop();
           this.cameras.main.shake(500);
@@ -241,7 +239,7 @@ var SceneOne = new Phaser.Class({
 
     platforms.setCollisionByExclusion(-1, true);
     this.walkspeed = 200;
-
+    // this.txt.startFollow(goody, true, .8, .8);
     this.cameras.main.startFollow(goody, true, 0.08, 0.08);
     this.cursors = this.input.keyboard.createCursorKeys();
     // mushrooms
@@ -410,7 +408,7 @@ var SceneOne = new Phaser.Class({
 });
 function incScore(amt) {
   score += amt;
-  this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
+  this.txt.bitmapText(goody.x, 0, "font", "SCORE:", 48).setOrigin(0);
   this.scoreTxt = this.add
     .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
     .setOrigin(0);
