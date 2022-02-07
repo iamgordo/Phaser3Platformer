@@ -32,8 +32,7 @@ var SceneOne = new Phaser.Class({
     this.load.on("fileprogress", function (file) {
       // console.log(file.src);
     });
-    this.load.on("complete", function () {
-    });
+    this.load.on("complete", function () {});
     this.load.audio("sfx", "./assets/audio/chinese_dream.mp3");
     this.load.audio("sfx1", "./assets/audio/enigma.mp3");
     this.load.audio("boom", "./assets/audio/boom.mp3");
@@ -135,11 +134,15 @@ var SceneOne = new Phaser.Class({
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     const two = map.createLayer("Two", tileset, 0, 0);
     // find camera x and add it toscore below
-    this.txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
-    this.scoreTxt = this.add
-      .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
-      .setOrigin(0);
-    // incScore(0);
+    // this.txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
+    // this.scoreTxt = this.add
+    //   .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
+    //   .setOrigin(0);
+    // // incScore(0);
+    // var textbox = this.add.text(100, 100, "Phaser");
+    // textbox.fixedToCamera = true;
+    // textbox.cameraOffset.setTo(100, 100);
+
     bad3 = new BadGuy(this, 500, 400);
     bad4 = new BadGuy(this, 400, 400);
     let collide1 = this.physics.add.collider(bad4, platforms);
@@ -224,13 +227,13 @@ var SceneOne = new Phaser.Class({
         },
       });
     }
-    this.physics.add.collider(goody, platforms, function () {
-    });
+    this.physics.add.collider(goody, platforms, function () {});
 
     platforms.setCollisionByExclusion(-1, true);
     this.walkspeed = 200;
     // this.txt.startFollow(goody, true, .8, .8);
     this.cameras.main.startFollow(goody, true, 0.08, 0.08);
+    // console.log(this.cameras.main.x);
     this.cursors = this.input.keyboard.createCursorKeys();
     // mushrooms
     this.bad1s = this.physics.add.group({
@@ -278,8 +281,27 @@ var SceneOne = new Phaser.Class({
     // this.physics.add.collider(goody, this.bad2s, function () {
     //   // bad2s.destroy();
     // });
+
     this.physics.add.overlap(this.bad2s, goody, function (bod1, bod2) {
       // this.stars.body.destroy();
+      // console.log(goody.body.x);
+      // this.add.text(goody.body.x, 100, "Phaser", {
+      //   fontFamily: "Arial",
+      //   fontSize: 64,
+      //   color: "#00ff00",
+      // });
+      // this.txt = this.add
+      //   .bitmapText(goody.body.x / 2, 0, "font", "SCORE:", 48)
+      //   .setOrigin(0);
+      // this.scoreTxt = this.add
+      //   .bitmapText(
+      //     goody.body.x / 2 + this.txt.width + 10,
+      //     0,
+      //     "font",
+      //     score,
+      //     48
+      //   )
+      //   .setOrigin(0);
       this.jumpon.play();
       bod2.destroy();
     });
@@ -294,7 +316,14 @@ var SceneOne = new Phaser.Class({
       star.setRotation(100);
     }, this);
     let self1 = this;
+
     this.physics.add.overlap(this.stars, goody, function (bod1, bod2) {
+      // console.log(goody.x);
+      // self1.add.text(goody.x, 100, "Phaser", {
+      //   fontFamily: "Arial",
+      //   fontSize: 64,
+      //   color: "#00ff00",
+      // });
       bod2.destroy();
       self1.rew.play();
     });
@@ -340,6 +369,11 @@ var SceneOne = new Phaser.Class({
     );
   },
   update: function () {
+    this.add.text(goody.x, 100, "Phaser", {
+      fontFamily: "Arial",
+      fontSize: 64,
+      color: "#00ff00",
+    });
     this.stars.getChildren().forEach(function (star) {
       // star.play("sparkle");
       star.rotation += 0.04;
@@ -361,6 +395,11 @@ var SceneOne = new Phaser.Class({
     if (this.cursors.left.isDown) {
       goody.setVelocityX(-this.walkspeed);
     } else if (this.cursors.right.isDown) {
+      // this.add.text(goody.x, 100, "Phaser", {
+      //   fontFamily: "Arial",
+      //   fontSize: 64,
+      //   color: "#00ff00",
+      // });
       goody.setVelocityX(this.walkspeed);
     } else {
       goody.setVelocityX(0);
@@ -396,10 +435,10 @@ var SceneOne = new Phaser.Class({
     }
   },
 });
-function incScore(amt) {
-  score += amt;
-  this.txt.bitmapText(goody.x, 0, "font", "SCORE:", 48).setOrigin(0);
-  this.scoreTxt = this.add
-    .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
-    .setOrigin(0);
-}
+// function incScore(amt) {
+//   score += amt;
+//   this.txt.bitmapText(goody.x, 0, "font", "SCORE:", 48).setOrigin(0);
+//   this.scoreTxt = this.add
+//     .bitmapText(txt.x + txt.width + 10, 0, "font", score, 48)
+//     .setOrigin(0);
+// }
