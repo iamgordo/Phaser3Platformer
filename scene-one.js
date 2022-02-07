@@ -52,7 +52,6 @@ var SceneOne = new Phaser.Class({
     this.load.image("tiles2", "./assets/img/kenney-tileset-64px.png");
     this.load.image("crate", "./assets/img/crate_04.png");
     this.load.image("guy2", "./assets/img/player_01.png");
-    // this.load.image("jump", "./assets/img/jump.png");
     this.load.image("bad1", "./assets/img/Mushroom_1.png");
     this.load.spritesheet("guy", "./assets/img/character1a.png", {
       frameWidth: 80,
@@ -145,11 +144,6 @@ var SceneOne = new Phaser.Class({
     bad4 = new BadGuy(this, 400, 400);
     let collide1 = this.physics.add.collider(bad4, platforms);
     let collide2 = this.physics.add.collider(bad3, platforms);
-    // below available>>>
-    // baddy = this.physics.add.sprite(500, 400, "bad");
-    // baddy.play("move");
-    // this.physics.add.collider(baddy, platforms);
-    // baddy.setVelocityX(100);
     let door1 = this.physics.add.staticImage(8000, 570, "door");
     goody = this.physics.add.sprite(300, 400, "guy");
     goody.body.width = 57;
@@ -230,11 +224,7 @@ var SceneOne = new Phaser.Class({
         },
       });
     }
-    // if (!goody.body.onFloor()) {
-    //   // goody.play("jumping");
-    // }
     this.physics.add.collider(goody, platforms, function () {
-      // goody.play("jumping");
     });
 
     platforms.setCollisionByExclusion(-1, true);
