@@ -15,6 +15,7 @@ var SceneTwo = new Phaser.Class({
     this.load.tilemapTiledJSON("map2", "assets/tilemap/level2.json");
   },
   create: function () {
+    // this.minimap = this.cameras.add(0, 0, 448, 64).setZoom(1).setName("mini");
     this.fx = this.sound.add("sfx2", { loop: true });
     this.fx.setVolume(0.2);
     this.fx.play();
@@ -37,6 +38,13 @@ var SceneTwo = new Phaser.Class({
     const tileset = map.addTilesetImage("tileset", "tiles");
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     const two = map.createLayer("Two", tileset, 0, 0);
+
+    this.txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
+    this.scoreTxt = this.add
+      .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
+      .setOrigin(0);
+    this.minimap = this.cameras.add(0, 0, 448, 64).setZoom(1).setName("mini");
+
     this.anims.create({
       key: "sparkle",
       frameRate: 20,
@@ -76,7 +84,7 @@ var SceneTwo = new Phaser.Class({
         .setVelocity(this.xSpeed, 0);
     });
     var text = this.add.text(640, 260, "Scene Two!", {
-      fontSize: 50,
+      fontSize: 70,
       color: "#FFF",
       fontStyle: "bold",
     });
@@ -101,6 +109,10 @@ var SceneTwo = new Phaser.Class({
     this.physics.add.overlap(this.stars, goody, function (bod1, bod2) {
       bod2.destroy();
       self1.rew.play();
+      score += 50;
+      self.scoreTxt = self.add
+        .bitmapText(self.txt.x + self.txt.width + 10, 0, "font", score, 48)
+        .setOrigin(0);
     });
     this.brainguys.getChildren().forEach(function (bad1) {
       bad1.play("move");
@@ -113,6 +125,10 @@ var SceneTwo = new Phaser.Class({
       if (bod2.body.position.y - bod1.body.position.y > 90) {
         self.jumpon.play();
         bod2.destroy();
+        score += 50;
+        self.scoreTxt = self.add
+          .bitmapText(self.txt.x + self.txt.width + 10, 0, "font", score, 48)
+          .setOrigin(0);
       } else {
         self.fx.stop();
         self.boom.play();
