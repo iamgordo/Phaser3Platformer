@@ -134,7 +134,7 @@ var SceneOne = new Phaser.Class({
     this.scoreTxt = this.add
       .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
       .setOrigin(0);
-    this.minimap = this.cameras.add(0, 0, 500, 100).setZoom(1).setName("mini");
+    this.minimap = this.cameras.add(0, 0, 448, 64).setZoom(1).setName("mini");
 
     bad3 = new BadGuy(this, 500, 400);
     bad4 = new BadGuy(this, 400, 400);
