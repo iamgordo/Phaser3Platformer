@@ -19,7 +19,7 @@ var SceneOne = new Phaser.Class({
     var progressBar = this.add.graphics();
     var progressBox = this.add.graphics();
 
-    progressBox.fillStyle(0x222222, 0.9);
+    progressBox.fillStyle(0x000, 0.3);
     progressBox.fillRect(240, 270, 380, 70);
 
     this.load.on("progress", function (value) {
@@ -46,6 +46,7 @@ var SceneOne = new Phaser.Class({
       "assets/img/azo-fire.xml"
     );
     this.load.image("door", "./assets/img/door.png");
+    this.load.image("cam", "./assets/img/camera.png");
     this.load.image("box", "./assets/img/box.png");
     this.load.image("tiles", "./assets/img/tileset.png");
     this.load.image("tiles2", "./assets/img/kenney-tileset-64px.png");
@@ -80,6 +81,10 @@ var SceneOne = new Phaser.Class({
     // console.timeEnd("time");
   },
   create: function () {
+    // const container1 = this.add.container();
+    // const camera = this.add.image(40, 100, "cam");
+    // container1.add(camera);
+
     this.fx = this.sound.add("sfx", { loop: true });
     this.fx.setVolume(0.2);
     this.fx.play();
@@ -143,6 +148,12 @@ var SceneOne = new Phaser.Class({
     // var textbox = this.add.text(100, 100, "Phaser");
     // textbox.fixedToCamera = true;
     // textbox.cameraOffset.setTo(100, 100);
+
+    // const container1 = this.add.container();
+    // const camera = this.add.image(40, 100, "cam");
+    // container1.add(this.txt);
+    // this.cameras.main.ignore(container1);
+    this.minimap = this.cameras.add(0, 0, 500, 100).setZoom(1).setName("mini");
 
     bad3 = new BadGuy(this, 500, 400);
     bad4 = new BadGuy(this, 400, 400);
@@ -304,6 +315,10 @@ var SceneOne = new Phaser.Class({
       //   )
       //   .setOrigin(0);
       this.jumpon.play();
+      score += 100;
+      this.scoreTxt = this.add
+        .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
+        .setOrigin(0);
       bod2.destroy();
     });
     map.getObjectLayer("Stars").objects.forEach((star) => {
@@ -332,6 +347,10 @@ var SceneOne = new Phaser.Class({
       //   )
       //   .setOrigin(0);
       bod2.destroy();
+      score += 50;
+      self1.scoreTxt = self1.add
+        .bitmapText(self1.txt.x + self1.txt.width + 10, 0, "font", score, 48)
+        .setOrigin(0);
       self1.rew.play();
     });
     let collide4 = this.physics.add.collider(this.bad1s, platforms);
@@ -355,6 +374,16 @@ var SceneOne = new Phaser.Class({
             loop: false,
             callback: () => {
               bod2.destroy();
+              score += 50;
+              self1.scoreTxt = self1.add
+                .bitmapText(
+                  self1.txt.x + self1.txt.width + 10,
+                  0,
+                  "font",
+                  score,
+                  48
+                )
+                .setOrigin(0);
             },
           });
         } else {
