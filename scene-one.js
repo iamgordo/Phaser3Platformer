@@ -134,10 +134,11 @@ var SceneOne = new Phaser.Class({
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     const two = map.createLayer("Two", tileset, 0, 0);
     // find camera x and add it toscore below
-    // this.txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
-    // this.scoreTxt = this.add
-    //   .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
-    //   .setOrigin(0);
+
+    this.txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
+    this.scoreTxt = this.add
+      .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
+      .setOrigin(0);
     // // incScore(0);
     // var textbox = this.add.text(100, 100, "Phaser");
     // textbox.fixedToCamera = true;
@@ -318,12 +319,18 @@ var SceneOne = new Phaser.Class({
     let self1 = this;
 
     this.physics.add.overlap(this.stars, goody, function (bod1, bod2) {
-      // console.log(goody.x);
-      // self1.add.text(goody.x, 100, "Phaser", {
-      //   fontFamily: "Arial",
-      //   fontSize: 64,
-      //   color: "#00ff00",
-      // });
+      // self1.txt = this.add
+      //   .bitmapText(goody.body.x / 2, 0, "font", "SCORE:", 48)
+      //   .setOrigin(0);
+      // self1.scoreTxt = this.add
+      //   .bitmapText(
+      //     goody.body.x / 2 + this.txt.width + 10,
+      //     0,
+      //     "font",
+      //     score,
+      //     48
+      //   )
+      //   .setOrigin(0);
       bod2.destroy();
       self1.rew.play();
     });
@@ -369,11 +376,11 @@ var SceneOne = new Phaser.Class({
     );
   },
   update: function () {
-    this.add.text(goody.x, 100, "Phaser", {
-      fontFamily: "Arial",
-      fontSize: 64,
-      color: "#00ff00",
-    });
+    // this.add.text(goody.x, 100, "Phaser", {
+    //   fontFamily: "Arial",
+    //   fontSize: 64,
+    //   color: "#00ff00",
+    // });
     this.stars.getChildren().forEach(function (star) {
       // star.play("sparkle");
       star.rotation += 0.04;
