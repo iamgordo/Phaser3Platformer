@@ -29,6 +29,7 @@ var SceneOne = new Phaser.Class({
 
     this.load.on("fileprogress", function (file) {});
     this.load.on("complete", function () {});
+
     this.load.audio("sfx", "./assets/audio/chinese_dream.mp3");
     this.load.audio("sfx1", "./assets/audio/enigma.mp3");
     this.load.audio("boom", "./assets/audio/boom.mp3");
@@ -42,6 +43,7 @@ var SceneOne = new Phaser.Class({
       "assets/img/azo-fire.xml"
     );
     this.load.image("door", "./assets/img/door.png");
+    this.load.image("gman", "./assets/img/gingerbread.png");
     this.load.image("cam", "./assets/img/camera.png");
     this.load.image("box", "./assets/img/box.png");
     this.load.image("tiles", "./assets/img/tileset.png");
@@ -130,9 +132,20 @@ var SceneOne = new Phaser.Class({
     const platforms = map.createLayer("Platforms", tileset, 0, 0);
     const two = map.createLayer("Two", tileset, 0, 0);
 
+    let gman = this.physics.add.staticImage(200, 300, "gman");
+    gman.setScale(4);
+    this.tweens.add({
+      targets: [gman],
+      props: {
+        rotation: { value: "+=6", duration: 3000, ease: "Bounce" },
+        x: { value: "500", duration: 1500, ease: "Bounce.easeOut" },
+      },
+      delay: 1000,
+    });
+
     this.txt = this.add.bitmapText(0, 0, "font", "SCORE:", 48).setOrigin(0);
     this.scoreTxt = this.add
-      .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
+      .dynamicBitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
       .setOrigin(0);
     this.minimap = this.cameras.add(0, 0, 448, 64).setZoom(1).setName("mini");
 
@@ -268,7 +281,13 @@ var SceneOne = new Phaser.Class({
       this.jumpon.play();
       score += 100;
       this.scoreTxt = this.add
-        .bitmapText(this.txt.x + this.txt.width + 10, 0, "font", score, 48)
+        .dynamicBitmapText(
+          this.txt.x + this.txt.width + 10,
+          0,
+          "font",
+          score,
+          48
+        )
         .setOrigin(0);
       bod2.destroy();
     });
@@ -288,7 +307,13 @@ var SceneOne = new Phaser.Class({
       bod2.destroy();
       score += 50;
       self1.scoreTxt = self1.add
-        .bitmapText(self1.txt.x + self1.txt.width + 10, 0, "font", score, 48)
+        .dynamicBitmapText(
+          self1.txt.x + self1.txt.width + 10,
+          0,
+          "font",
+          score,
+          48
+        )
         .setOrigin(0);
       self1.rew.play();
     });
@@ -307,7 +332,14 @@ var SceneOne = new Phaser.Class({
       function (bod1, bod2) {
         self1.jumpon.play();
         if (bod2.y - bod1.y > 80) {
-          bod1.setVelocityY(-160);
+          bod1.setVelocityY(-260);
+          this.tweens.add({
+            targets: [bod2],
+            props: {
+              y: { value: "-=306", duration: 200, ease: "Bounce" },
+              // x: { value: "500", duration: 1500, ease: "Bounce.easeOut" },
+            },
+          });
           this.time.addEvent({
             delay: 200,
             loop: false,
@@ -315,7 +347,7 @@ var SceneOne = new Phaser.Class({
               bod2.destroy();
               score += 50;
               self1.scoreTxt = self1.add
-                .bitmapText(
+                .dynamicBitmapText(
                   self1.txt.x + self1.txt.width + 10,
                   0,
                   "font",
