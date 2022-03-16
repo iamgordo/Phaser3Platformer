@@ -133,7 +133,7 @@ var SceneOne = new Phaser.Class({
     const two = map.createLayer("Two", tileset, 0, 0);
 
     let gman = this.physics.add.staticImage(200, 300, "gman");
-    gman.setScale(4);
+    gman.setScale(1);
     this.tweens.add({
       targets: [gman],
       props: {
@@ -336,8 +336,8 @@ var SceneOne = new Phaser.Class({
           this.tweens.add({
             targets: [bod2],
             props: {
-              y: { value: "-=306", duration: 200, ease: "Bounce" },
-              // x: { value: "500", duration: 1500, ease: "Bounce.easeOut" },
+              y: { value: "-=206", duration: 200, ease: "Power" },
+              rotation: { value: "+=1", duration: 200, ease: "Bounce.easeOut" },
             },
           });
           this.time.addEvent({
