@@ -325,7 +325,6 @@ var SceneOne = new Phaser.Class({
         bod2.destroy();
       }
     );
-    // !!!this is all or nothing collision detection possibly?????Unsure
     let collide3 = this.physics.add.collider(
       goody,
       this.bad1s,
